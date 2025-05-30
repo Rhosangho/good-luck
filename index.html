@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>랜덤 추첨기 (1인 1회)</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 50px; }
+    button { font-size: 24px; padding: 15px 30px; cursor: pointer; }
+    .result { margin-top: 30px; font-size: 32px; }
+  </style>
+</head>
+<body>
+  <h1>🎁 추첨 이벤트 🎁</h1>
+  <button id="drawButton" onclick="draw()">추첨하기</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    const resultDiv = document.getElementById("result");
+    const drawButton = document.getElementById("drawButton");
+
+    // 추첨 이력 확인
+    const alreadyDrawn = localStorage.getItem("hasDrawn");
+
+    if (alreadyDrawn) {
+      resultDiv.innerText = "이미 추첨에 참여하셨습니다.";
+      drawButton.disabled = true;
+    }
+
+    function draw() {
+      const result = Math.random() < 0.3 ? "🎉 당첨!" : "❌ 꽝!";
+      resultDiv.innerText = result;
+      localStorage.setItem("hasDrawn", "true");
+      drawButton.disabled = true;
+    }
+  </script>
+</body>
+</html>
